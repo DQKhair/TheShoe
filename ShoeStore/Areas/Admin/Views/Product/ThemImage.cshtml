@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "ThemImage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto"">
+    <div class="col mb-3">
+        <form action="@Url.RouteUrl("ThemAnh")" method="post" enctype="multipart/form-data" class="w-100">
+                <div class="form-horizontal w-100 mx-auto" style="background-color: white; padding: 30px; border-radius: 1rem">
+                    <h4>Image</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col">
+                            <label for="" class="form-label my-3">ID</label>
+                            <input type="text" name="ProductId" class="form-control" value="@ViewBag.sua.ProductId" readonly />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                            <label for="" class="form-label my-3">Image</label>
+                            <input type="file" name="anh" class="form-control" value="" />
+                        </div>
+                        <div class="col-5 ">
+                            <label for="" class="form-label my-3">Image Extension</label>
+                            <input type="text" name="ImageExtension" class="form-control" value="" />
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end text-lg-end">
+                        <button class="btn btn-success mt-3" style="border-radius: 1.5rem; width: 100px; margin-left: 15px;" type="submit">Save</button>
+                    </div>
+                </div>
+          
+        </form>
+    </div>
+    <div class="col mb-3">
+        <form action="@Url.RouteUrl("ThemThongTin")" method="post" class="w-100">
+                <div class="form-horizontal w-100 mx-auto" style="background-color: white; padding: 30px; border-radius: 1rem">
+                    <h4>Color & Size</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col">
+                            <label for="" class="form-label my-3">Color</label>
+                            <select name="mau" id="" class = "form-select p-2 mw-100" }>
+                                @foreach (var color in ViewBag.Color)
+                                {
+                                    <option value="@color.ColorId">@color.ColorName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="" class="form-label my-3">Size</label>
+                            <select name="size" id="" class = "form-select p-2 mw-100" }>
+                                @foreach (var size in ViewBag.Size)
+                                {
+                                    <option value="@size.SizeId">@size.SizeValue</option>
+                                }
+                            </select>
+                           
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col">
+                            <label for="" class="form-label my-3">Quantity</label>
+                            <input type="text" name="Soluong" class="form-control" value="" />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end text-lg-end">
+                        <button class="btn btn-success mt-3" name="ProductID" style="border-radius: 1.5rem; width: 100px; margin-left: 15px;" type="submit" value="@ViewBag.sua.ProductId">Save</button>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+@*@Html.ActionLink("Cancel", "manager", "Product", new { @class = "btn btn-outline-success mt-3", @style = "border-radius: 1.5rem;  width: 100px;" })*@
+
+
+
+

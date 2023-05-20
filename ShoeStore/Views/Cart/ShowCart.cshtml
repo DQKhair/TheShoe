@@ -1,0 +1,143 @@
+﻿@model ShoeStore.Models.Carts
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<style>
+
+    #cart_img_w-100 {
+        width: 25%;
+    }
+
+    #cart_update_quatity {
+        width: 25%
+    }
+
+    @@media only screen and (max-width: 740px) {
+        #cart_img_w-100 {
+            width: 100%;
+        }
+
+        #cart_update_quatity {
+            width: 100%
+        }
+    }
+</style>
+<h5 class="fw-bold text-uppercase my-3">My shopping cart</h5>
+<p class="text-danger"><b>When you buy more than 3 products, you will get a discount of up to  <span style="font-size:xx-large">10% </span>of the total product price</b></p>
+<a class="text-decoration-none" href="@Url.Action("Index","HomeSP")">Buy more products</a>
+@if (Model != null)
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayName("Name")</th>
+                <th scope="col">@Html.DisplayName("Image")</th>
+                <th scope="col">@Html.DisplayName("Color")</th>
+                <th scope="col">@Html.DisplayName("Size")</th>
+                <th scope="col">@Html.DisplayName("Price")</th>
+                <th scope="col">@Html.DisplayName("Quantity")</th>
+                <th scope="col">@Html.DisplayName("into money")</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                decimal total = item._quantity * (decimal)item._product.ProductPrice.Value;
+            <tr>
+                <td>@Html.DisplayFor(model => item._product.ProductName)</td>
+                <td>
+                    <!-- Hình detail-->
+                    <div class="detail-main-image-wrapper">
+                        @{
+                            string image = "";
+                            var product = item._imgData;
+                            if (product != null)
+                            {
+                                image = Convert.ToBase64String(product);
+                            }
+                        }
+                        <div class="detail-main-image" style="height:30%;">
+                            <img class="w-25" src="data:image/png;base64,@image" />
+                        </div>
+                    </div>
+                </td>
+                <td class="text-danger">@item.ColorName</td>
+                <td class="text-danger">@item.SizeValue</td>
+                <td class="text-danger">@Html.DisplayFor(model => item._product.ProductPrice) VNĐ</td>
+                <td class="w-25">
+                    @using (Html.BeginForm("Update_Cart_Quantity", "Cart"))
+                    {
+                        <input type="hidden" value="@item._product.ProductId" name="idPro" />
+                        <input type="hidden" value="@item.ColorName" name="idcolor" />
+                        <input type="hidden" value="@item.SizeValue" name="idsize" />
+                        <input id="cart_update_quatity" class="form-control d-inline" type="number" value="@item._quantity" name="cartQuantity" min="0" required/>
+                        <input class="btn btn-success mt-1" type="submit" value="Cập nhật" />
+                    }
+                </td>
+                <td class="text-danger">@total.ToString("n0") VNĐ</td>
+                <td>
+                    <a class="btn btn-danger" href="@Url.Action("RemoveCart","Cart",new {id = item._product.ProductId, ColorName = item.ColorName, SizeValue = item.SizeValue})">Xóa</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        @if (Model.Total_quantity() != 0)
+        {
+            <p class="fw-bold">Total quantity: <span>@Model.Total_quantity()</span></p>
+            <p class="fw-bold">Total money: <span class="text-danger">@Model.Total_money().ToString("n0") VNĐ</span></p>
+        }
+        @using (Html.BeginForm("CheckOut", "Cart"))
+        {
+            <div>
+                <div class=" w-50 mx-auto">
+                    @if (Model.Total_quantity() != 0)
+                    {
+                    <h5 class="fw-bold text-uppercase text-center">Please fill in the information</h5>
+                        if (Session["NguoiDung"] == null)
+                        {
+                        <label for="TenKH" class="form-label">Customer name</label>
+                            <input name="TenKhachHang" type="text" id="TenKH" class="form-control mw-100">
+                        }
+                        <label for="DiaChiGiaoHang" class="form-label">Address for delivery</label>
+                        <input name="DiaChiGiaoHang" type="text" id="DiaChiKH" class="form-control mw-100">
+                        <label for="SdtKH" class="form-label">Phone number</label>
+                        <input name="SdtKhachHang" type="text" id="sdtKH" class="form-control mw-100">
+                        <label for="PTT" class="form-label">Payment methods</label> <br />
+                        <input checked="checked"
+                               id="MaPhuongThuc"
+                               name="MaPhuongThuc"
+                               type="radio"
+                               value="2" /> <span>Payment on delivery</span><br />
+                        <input id="MaPhuongThuc"
+                               name="MaPhuongThuc"
+                               type="radio"
+                               value="1" /> <span>Other payment</span>
+
+                        <div>
+                            <input type="submit" name="CheckOut" class="btn btn-success" value="Thanh toán" />
+                            @if (Session["NguoiDung"] == null)
+                            {
+                                <a href="@Url.Action("RegisterUser", "LoginUser")" class="btn btn-success my-3">Register</a>
+                            }
+                        </div>
+
+                    }
+                    else
+                    {
+                <p class="text-danger" style="text-align:center">No products! Please buy the product</p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    @*@Html.Partial("EmptyCart")*@
+}

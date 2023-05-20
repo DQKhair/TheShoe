@@ -1,0 +1,150 @@
+﻿@using ShoeStore.Common;
+@using ShoeStore.Models;
+@*@{
+    var session = (List<LayChucNang_Result>)Session[CommonConstants.CHUC_NANG];
+    var session_user = Session[CommonConstants.TEN_NGUOI_DUNG];
+    string controller = ViewContext.RouteData.Values["controller"].ToString();
+}*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/fbda8849fb.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <!--#region Vùng không sửa code -->
+    <header>
+        <!-- Cái này là thanh điều hướng trên cùng -->
+        <div class="wrap-navbar">
+            <nav class="navigation-bar">
+                <div class="space"></div>
+                <div class="nav-content d-flex justify-content-end align-items-center">
+                    <div class="user-option-wrap">
+                        @*<div class="user-option-name">
+                            <span>@if (session_user != null) { Write(session_user); } else { Write("Chưa có tên"); }</span>
+                        </div>*@
+                        <div class="user-option-img">
+                            <img src="~/Images/avt.png" alt="Image" />
+                        </div>
+                        <div class="user-option-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 19 11" fill="none">
+                                <path d="M0.324495 2.04013L8.08015 10.4396C8.20516 10.5749 8.36024 10.6835 8.53474 10.758C8.70923 10.8325 8.89902 10.871 9.09108 10.871C9.28315 10.871 9.47294 10.8325 9.64743 10.758C9.82193 10.6835 9.977 10.5749 10.102 10.4396L17.8577 2.04013C18.5978 1.23839 17.9842 -1.73979e-06 16.8467 -1.69007e-06L1.33321 -1.01195e-06C0.19577 -9.62232e-07 -0.417891 1.23839 0.324495 2.04013Z" fill="white" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="user-option-dropdown-menu-wrap shadow-sm">
+                        @*<ul class="user-option-dropdown-menu">
+                            <li><a href="">@CommonConstants.OPTION_1</a></li>
+                            <li><a href="">@CommonConstants.OPTION_2</a></li>
+                            <li><a href="">@CommonConstants.OPTION_3</a></li>
+                            <li class="cross-line"><a href="">@CommonConstants.OPTION_LOGOUT</a></li>
+                        </ul>*@
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main d-flex">
+        <div class="wrap-sidebar">
+            <div class="sidebar shadow-lg d-flex flex-column">
+                <div class="logo">
+                    <img src="~/Images/logo.png" alt="" srcset="" style="width:130px; height:40px;">
+                </div>
+                @*<div class="main-menu holder">
+                    <div class="main-menu-holder">
+                        <div class="minimize-button" id="minimize-button">
+                            <i class='mini-icon bx bx-chevron-left'></i>
+                        </div>
+                    </div>
+                </div>*@
+            <ul class="main-menu">
+                <li class="main-menu-item-wrap mb-1">
+                    <a class="main-menu-item  " href=""><i class="fa-solid fa-house"></i> Dashboard</a>
+                </li>
+                <li class="main-menu-item-wrap mb-1">
+                    <a class="main-menu-item  " href="~/Admin/Account/CustomerList"><i class="fa-solid fa-user"></i> Customer</a>
+                </li>
+                <li class="main-menu-item-wrap mb-1">
+                    <a class="main-menu-item  " href="~/Admin/Product/Manager"><i class="fa-solid fa-box-archive"></i> Product </a>
+                </li>
+                <li class="main-menu-item-wrap mb-1">
+                    <a class="main-menu-item  " href=""><i class="fa-solid fa-file"></i> Order </a>
+                </li>
+                <li class="main-menu-item-wrap mb-1">
+                    <a class="main-menu-item  " href=""><i class="fa-solid fa-chart-simple"></i> Statistic</a>
+                </li>
+                <li class="main-menu-item-wrap mb-1">
+                    <a class="main-menu-item  " href="~/Products/Home"><i class="fa-solid fa-chart-simple"></i> Home</a>
+                </li>
+                <li class="main-menu-item-wrap mb-1">
+                    <a class="main-menu-item  " href="~/Auth/Login"><i class="fa-solid fa-chart-simple"></i> Log out</a>
+                </li>
+
+                @*@if (session != null)
+        {
+            foreach (var chucNang in session)
+            {
+                <li class="main-menu-item-wrap @if (chucNang.Controller == controller) { Write("active"); } ">
+                    <a class="main-menu-item  " href="@Url.Action($"{chucNang.Action}", $"{chucNang.Controller}")">
+                        <svg width="22" height="22" viewBox="0 0 33 31" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            @Html.Raw(chucNang.BieuTuong);
+                        </svg>
+                        <span>@chucNang.TenChucNang</span>
+                    </a>
+                </li>
+
+            }
+        }*@
+
+                @*<li class="main-menu-item-wrap">
+            <a class="main-menu-item" href="#">
+                <svg width="22" height="22" viewBox="0 0 29 29" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M27.8207 28.78H1.91867C1.4098 28.78 0.921784 28.5779 0.561965 28.218C0.202145 27.8582 0 27.3702 0 26.8613V0.959333C0 0.704902 0.101072 0.460892 0.280982 0.280982C0.460892 0.101072 0.704902 0 0.959333 0C1.21376 0 1.45777 0.101072 1.63768 0.280982C1.81759 0.460892 1.91867 0.704902 1.91867 0.959333V26.8613H27.8207C28.0751 26.8613 28.3191 26.9624 28.499 27.1423C28.6789 27.3222 28.78 27.5662 28.78 27.8207C28.78 28.0751 28.6789 28.3191 28.499 28.499C28.3191 28.6789 28.0751 28.78 27.8207 28.78Z" />
+                    <path d="M0 26.8613H-2H0ZM0.959333 0V-2V0ZM1.91867 0.959333H3.91867H1.91867ZM1.91867 26.8613H-0.0813333V28.8613H1.91867V26.8613ZM27.8207 26.78H1.91867V30.78H27.8207V26.78ZM1.91867 26.78C1.94024 26.78 1.96093 26.7886 1.97618 26.8038L-0.852249 29.6322C-0.117357 30.3671 0.879371 30.78 1.91867 30.78V26.78ZM1.97618 26.8038C1.99143 26.8191 2 26.8398 2 26.8613H-2C-2 27.9006 -1.58714 28.8974 -0.852249 29.6322L1.97618 26.8038ZM2 26.8613V0.959333H-2V26.8613H2ZM2 0.959333C2 1.23533 1.89036 1.50003 1.6952 1.6952L-1.13323 -1.13323C-1.68821 -0.578249 -2 0.17447 -2 0.959333H2ZM1.6952 1.6952C1.50003 1.89036 1.23533 2 0.959333 2V-2C0.17447 -2 -0.578249 -1.68821 -1.13323 -1.13323L1.6952 1.6952ZM0.959333 2C0.683332 2 0.418634 1.89036 0.223471 1.6952L3.0519 -1.13323C2.49692 -1.68821 1.7442 -2 0.959333 -2V2ZM0.223471 1.6952C0.0283079 1.50003 -0.0813333 1.23533 -0.0813333 0.959333H3.91867C3.91867 0.17447 3.60688 -0.578249 3.0519 -1.13323L0.223471 1.6952ZM-0.0813333 0.959333V26.8613H3.91867V0.959333H-0.0813333ZM1.91867 28.8613H27.8207V24.8613H1.91867V28.8613ZM27.8207 28.8613C27.5447 28.8613 27.28 28.7517 27.0848 28.5565L29.9132 25.7281C29.3582 25.1731 28.6055 24.8613 27.8207 24.8613V28.8613ZM27.0848 28.5565C26.8896 28.3614 26.78 28.0967 26.78 27.8207H30.78C30.78 27.0358 30.4682 26.2831 29.9132 25.7281L27.0848 28.5565ZM26.78 27.8207C26.78 27.5447 26.8896 27.28 27.0848 27.0848L29.9132 29.9132C30.4682 29.3582 30.78 28.6055 30.78 27.8207H26.78ZM27.0848 27.0848C27.28 26.8896 27.5447 26.78 27.8207 26.78V30.78C28.6055 30.78 29.3582 30.4682 29.9132 29.9132L27.0848 27.0848Z"
+                          fill="#228542" />
+                    <path d="M8.39417 23.9427H5.99584C5.68859 23.9427 5.39392 23.8206 5.17666 23.6033C4.9594 23.3861 4.83734 23.0914 4.83734 22.7842V13.6705C4.83734 13.3632 4.9594 13.0686 5.17666 12.8513C5.39392 12.634 5.68859 12.512 5.99584 12.512H8.39417C8.70143 12.512 8.9961 12.634 9.21336 12.8513L9.92046 12.1442L9.21336 12.8513C9.43062 13.0686 9.55267 13.3632 9.55267 13.6705V22.7842C9.55267 23.0914 9.43062 23.3861 9.21336 23.6033C8.9961 23.8206 8.70143 23.9427 8.39417 23.9427Z"
+                          stroke="#228542" stroke-width="2" />
+                    <path d="M17.0281 23.9427H14.6298C14.3226 23.9427 14.0279 23.8206 13.8106 23.6034L13.1035 24.3105L13.8106 23.6034C13.5934 23.3861 13.4713 23.0914 13.4713 22.7842V10.7925C13.4713 10.4852 13.5934 10.1906 13.8106 9.97332C14.0279 9.75606 14.3226 9.634 14.6298 9.634H17.0281C17.3354 9.634 17.6301 9.75606 17.8473 9.97332L18.5544 9.26621L17.8473 9.97332C18.0646 10.1906 18.1866 10.4852 18.1866 10.7925V22.7842C18.1866 23.0914 18.0646 23.3861 17.8473 23.6034C17.6301 23.8206 17.3354 23.9427 17.0281 23.9427Z"
+                          stroke="#228542" stroke-width="2" />
+                    <path d="M25.6406 23.9427H23.2422C22.935 23.9427 22.6403 23.8206 22.4231 23.6034L21.7189 24.3075L22.4231 23.6034C22.2058 23.3861 22.0837 23.0914 22.0837 22.7842V6.95518C22.0837 6.64792 22.2058 6.35325 22.4231 6.13599C22.6403 5.91873 22.935 5.79668 23.2422 5.79668H25.6406C25.9478 5.79668 26.2425 5.91873 26.4598 6.13599L27.1669 5.42889L26.4598 6.13599C26.677 6.35325 26.7991 6.64792 26.7991 6.95518V22.7842C26.7991 23.0914 26.677 23.3861 26.4598 23.6034C26.2425 23.8206 25.9478 23.9427 25.6406 23.9427Z"
+                          stroke="#228542" stroke-width="2" />
+                </svg>
+                <span>Thống kê báo cáo</span>
+            </a>
+        </li>*@
+            </ul>
+            </div>
+        </div>
+        <!--#endregion -->
+        <div class="wrap-content d-flex flex-column">
+            @RenderBody()
+            <!-- Nơi thả content vào -->
+            <!-- Không sửa class -->
+            <div class="content-row-space shadow-sm">
+                <!-- Hàng chức năng ở trên -->
+                <!-- Không sửa class "content-row-space" -->
+            </div>
+            <div class="content">
+                <!-- Trong này là nội dung theo từng chức năng -->
+                <!-- Không sửa class "content" -->
+            </div>
+
+            <footer>Copyright 2023 GHK2P. All rights reserved.</footer>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/app")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Thêm sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
+        <div class="form-horizontal w-50 mx-auto " style="background-color: white; padding: 30px; border-radius: 1rem">
+            <h4 class="text-center">Add Product</h4>
+            @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+            <hr />
+
+            <div class="form">
+                <div class="col">
+                    <label for="" class="form-label my-3">Name</label>
+                    <input type="text" name="ProductName" class="form-control" value="" />
+                </div>
+                <div class="col">
+                    <label for="" class="form-label my-3">Category</label>
+                    <input type="text" name="ProductCategory" class="form-control" value="" />
+                </div>
+          
+                <div class="col">
+                    <label for="" class="form-label my-3">Price</label>
+                    <input type="text" name="ProductPrice" class="form-control" value="" />
+                </div>
+                <div class="col">
+                    <label for="" class="form-label my-3">Description</label>
+                    <input type="text" name="Description" class="form-control" value="" />
+                </div>
+
+            </div>
+            <div class="d-flex justify-content-center text-center">
+                @Html.ActionLink("Cancel", "Manager", "Product", new { @class = "btn btn-outline-success mt-3", @style = "border-radius: 1.5rem;  width: 100px;" })
+                <input class="btn btn-success mt-3" style="border-radius: 1.5rem; width: 100px; margin-left: 15px;" type="submit" value="Add" />
+            </div>
+        </div>
+
+    </div>
+}
+
+
+

@@ -1,0 +1,357 @@
+﻿@model ShoeStore.Models.GetProducts_Result
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="list-wrapper">
+    <div class="list-side-bar-space">
+        <div class="list-side-bar-wrap">
+            <div class="list-side-bar">
+                <div class="list-menu category">
+                    <ul>
+                        <li>Running</li>
+                        <li>Lifestyle</li>
+                        <li>Baseketbal</li>
+                        <li>Football</li>
+                        <li>Traning & Gym</li>
+                        <li>Jordan</li>
+                        <li>Skateboarding</li>
+                        <li>Golf</li>
+                        <li>Tennis</li>
+                        <li>Athletics</li>
+                        <li>Walking</li>
+                    </ul>
+                </div>
+                <div class="list-menu price">
+                    <button class="dropdown-btn">
+                        Shop by price
+                    </button>
+                    <div class="list-dropdown-container price">
+                        <p><input type="checkbox" name="" id="">Under 1,000,000đ</p>
+                        <p><input type="checkbox" name="" id="">Under 1,000,000đ</p>
+                        <p><input type="checkbox" name="" id="">Under 1,000,000đ</p>
+                        <p><input type="checkbox" name="" id="">Under 1,000,000đ</p>
+                    </div>
+                </div>s
+                <div class="list-menu size">
+                    <button class="dropdown-btn">
+                        Size
+                    </button>
+                    <div class="list-dropdown-container size">
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                    </div>
+                </div>
+                <div class="list-menu color">
+                    <button class="dropdown-btn">
+                        Colours
+                    </button>
+                    <div class="dropdown-container color">
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="list-products-wrap">
+        <div class="list-body-title">
+
+            <div class="list-title-span">@ViewBag.Category</div>
+            <div class="list-sort-by-wrap">
+                <button class="dropdown-btn">
+                    Sort by
+                </button>
+                <div class="list-dropdown-container box">
+                    <div class=""> A - Z</div>
+                    <div class=""> Z - A</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="list-product-items-wrap">
+            @foreach (var product in ViewBag.Product)
+            {
+                string image = "";
+                if (product.ImageData != null)
+                {
+                    image = Convert.ToBase64String(product.ImageData);
+                }
+                <div class="list-product-item">
+                    <a href="@Url.RouteUrl("ChiTietSanPham", new { id = product.ProductId }) ">
+                        <div class="list-product-img-wrap">
+                            <img src="data:image/@product.ImageExtension;base64,@Convert.ToBase64String(product.ImageData)" alt="">
+                        </div>
+                        <div class="list-product-name-wrap">
+                            @product.ProductName
+                        </div>
+                        <div class="list-product-category-wrap">
+                            @product.CategoryName
+                        </div>
+                        <div class="list-product-color-warp">
+                            @product.ColorSum Color
+                        </div>
+                        <div class="list-product-price">
+                            @product.ProductPrice.ToString("n0") VND
+                        </div>
+                    </a>
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+</div>
+<script>
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            dropdownContent.classList.toggle("active");
+        });
+    }
+</script>
+
+@section Styles
+{
+    <style type="text/css">
+        /* #region Body */
+        .list-wrapper {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+            margin-top: 20px;
+        }
+
+        /* #region Sidebar */
+        .list-side-bar-space {
+            width: 250px;
+            height: 100vh;
+        }
+
+        .list-side-bar-wrap {
+            position: fixed;
+            overflow: hidden;
+            overflow-y: scroll;
+            top: 100px;
+            bottom: 200px;
+            width: inherit;
+        }
+
+        .list-side-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .list-menu {
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            border-bottom: #D9D9D9 1px solid;
+        }
+
+            .list-menu:last-child {
+                border-bottom: unset;
+            }
+
+            .list-menu li {
+                list-style: none;
+            }
+
+        .dropdown-btn {
+            padding: 6px 0px 6px 16px;
+            text-decoration: none;
+            font-size: unset;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+            width: max-content;
+        }
+
+        .list-dropdown-container {
+            flex-direction: column;
+            display: none;
+            width: inherit;
+        }
+
+            .list-dropdown-container.active {
+                display: flex;
+            }
+
+            .list-dropdown-container.size {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+                .list-dropdown-container.size div {
+                    border: #000 1px solid;
+                    border-radius: 5px;
+                    width: fit-content;
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                }
+
+                    .list-dropdown-container.size div.active {
+                        background: #000;
+                        color: white;
+                    }
+
+                    .list-dropdown-container.size div:hover {
+                        background: #000;
+                        color: white;
+                    }
+
+            .list-dropdown-container.color {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+                .list-dropdown-container.color div {
+                    border: #000 1px solid;
+                    border-radius: 50%;
+                    width: 22px;
+                    height: 22px;
+                    cursor: pointer;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                }
+        /* #endregion Sidebar  */
+        /* #region Title*/
+        .list-body-title {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .list-sort-by-wrap {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            align-items: center;
+        }
+
+        .list-dropdown-container.box {
+            border-radius: 10px;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+            position: fixed;
+            background: white;
+            top: 90px;
+            width: 100px;
+            overflow: hidden;
+        }
+
+            .list-dropdown-container.box div {
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+
+                .list-dropdown-container.box div:hover {
+                    background: #d6d6d6;
+                }
+        /* #endregion Tilte*/
+
+        /* #region Product */
+
+        .list-products-wrap {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .list-product-items-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            gap: 20px;
+        }
+
+            .list-product-items-wrap a {
+                text-decoration: none;
+            }
+
+            .list-product-items-wrap .list-product-item {
+                color: #F0EEEE;
+                display: flex;
+                flex-direction: column;
+                flex-basis: 18%;
+                margin: 20px 0;
+                padding: 20px;
+            }
+
+                .list-product-items-wrap .list-product-item .list-product-img-wrap {
+                    width: 100%;
+                }
+
+                    .list-product-items-wrap .list-product-item .list-product-img-wrap img {
+                        width: 100%;
+                        object-fit: cover;
+                        aspect-ratio: 1/1;
+                    }
+
+                .list-product-items-wrap .list-product-item .list-product-name-wrap {
+                    color: black;
+                    font-weight: 600;
+                }
+
+                .list-product-items-wrap .list-product-item .list-product-category-wrap {
+                    color: gray !important;
+                }
+
+                .list-product-items-wrap .list-product-item .list-product-color-warp {
+                    color: gray;
+                }
+
+                .list-product-items-wrap .list-product-item .list-product-price {
+                    color: black;
+                    font-weight: 600;
+                }
+
+                .list-product-items-wrap .list-product-item .list-product-item {
+                    display: flex;
+                    flex-direction: column;
+                    color: black;
+                    font-family: 'Montserrat', sans-serif;
+                    -webkit-user-select: none; /* Safari */
+                    -ms-user-select: none; /* IE 10 and IE 11 */
+                    user-select: none; /* Standard syntax */
+                }
+
+        /* #endregion Body */
+    </style>
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="967d1ca6a2864ccc9fd268643354ae4f" Name="Diagram1" ZoomLevel="73" >
+        <EntityTypeShape EntityType="ShoeStoreModel.Account" Width="1.5" PointX="8.25" PointY="0.875" />
+        <EntityTypeShape EntityType="ShoeStoreModel.Category" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="ShoeStoreModel.Color" Width="1.5" PointX="4.5" PointY="7.125" />
+        <EntityTypeShape EntityType="ShoeStoreModel.Customer" Width="1.5" PointX="11.875" PointY="3.125" />
+        <EntityTypeShape EntityType="ShoeStoreModel.Image" Width="1.5" PointX="5.125" PointY="3.75" />
+        <EntityTypeShape EntityType="ShoeStoreModel.Payment" Width="1.5" PointX="9.75" PointY="10.375" />
+        <EntityTypeShape EntityType="ShoeStoreModel.ProductColorSize" Width="1.5" PointX="6.5" PointY="7.25" />
+        <EntityTypeShape EntityType="ShoeStoreModel.Product" Width="1.5" PointX="3" PointY="3.375" />
+        <EntityTypeShape EntityType="ShoeStoreModel.Receipt" Width="1.5" PointX="10.875" PointY="6.375" />
+        <EntityTypeShape EntityType="ShoeStoreModel.Size" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="ShoeStoreModel.StatusRC" Width="1.5" PointX="13.375" PointY="7.75" />
+        <AssociationConnector Association="ShoeStoreModel.FK__Customer__Custom__6E01572D" />
+        <AssociationConnector Association="ShoeStoreModel.FK__Products__Produc__72C60C4A" />
+        <AssociationConnector Association="ShoeStoreModel.FK__ProductCo__Color__6FE99F9F" />
+        <AssociationConnector Association="ShoeStoreModel.FK_RC_CUS" />
+        <AssociationConnector Association="ShoeStoreModel.FK__Image__ProductId__6EF57B66" />
+        <AssociationConnector Association="ShoeStoreModel.FK_RC_PM" />
+        <AssociationConnector Association="ShoeStoreModel.FK__ProductCo__Produ__70DDC3D8" />
+        <AssociationConnector Association="ShoeStoreModel.FK__ProductCo__SizeI__71D1E811" />
+        <AssociationConnector Association="ShoeStoreModel.FK_RC_STT" />
+        <EntityTypeShape EntityType="ShoeStoreModel.DetailReceipt" Width="1.5" PointX="8.625" PointY="4" />
+        <AssociationConnector Association="ShoeStoreModel.FK_ProductColorSizeID_Detail_RC" />
+        <AssociationConnector Association="ShoeStoreModel.FK_RC_Detail_RC" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

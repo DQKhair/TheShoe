@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "EmptyCart";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<h5 class="fw-bold text-uppercase my-3">Giỏ hàng của tôi</h5>
+<p class="text-danger"><b>Khi bạn mua trên 2 sản phẩm thì bạn sẽ được giảm giá lên đến <span style="font-size:xx-large">10% </span>tổng giá sản phẩm</b></p>
+<a class="text-decoration-none" href="@Url.Action("Index","HomeSP")">Mua thêm sản phẩm</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">@Html.DisplayName("Tên sản phẩm")</th>
+            <th scope="col">@Html.DisplayName("hình sản phẩm")</th>
+            <th scope="col">@Html.DisplayName("Giá")</th>
+            <th scope="col">@Html.DisplayName("Số lượng")</th>
+            <th scope="col">@Html.DisplayName("Thành tiền")</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <p class="fw-bold">Tổng tiền: <span class="text-danger">0 VNĐ</span></p>
+    <p class="text-danger" style="text-align:center">Chưa có sản phẩm nào! Vui lòng mua sản phẩm</p>
+</div>
+
+

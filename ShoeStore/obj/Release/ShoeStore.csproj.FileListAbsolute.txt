@@ -1,0 +1,2 @@
+C:\Users\NNP\Desktop\ShoeStore\obj\Release\ShoeStore.csproj.AssemblyReference.cache
+C:\Users\NNP\Desktop\ShoeStore\obj\Release\ShoeStore.csproj.CoreCompileInputs.cache

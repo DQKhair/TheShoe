@@ -1,0 +1,276 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="banner-wrap">
+    <div class="banner-img">
+        <img src="~/Images/slider1.png" alt="">
+    </div>
+</div>
+<div class="title-wrap">
+    <div class="background-title">S N E A K E R</div>
+    <div class="title">featured</div>
+    <div class="title-detail">products</div>
+</div>
+<div class="product-items-carousel owl-carousel owl-theme">
+    @foreach (var product in ViewBag.NewestProducts)
+    {
+        string image = "";
+        if (product.ImageData != null)
+        {
+            image = Convert.ToBase64String(product.ImageData);
+        }
+        <a href="@Url.RouteUrl("ChiTietSanPham", new { id = product.ProductId })" style="text-decoration:none;">
+            <div class="product-item-wrap item">
+                <div class="product-item">
+                    <div class="product-img-wrap">
+                        <img src="data:image/png;base64,@image" alt="">
+                    </div>
+                    <div class="product-name-wrap">
+                        @product.ProductName
+                    </div>
+                    <div class="product-category-wrap">
+                        @product.CategoryName
+                    </div>
+                    <div class="product-color-warp">
+                        @product.ColorSum Color
+                    </div>
+                    <div class="product-price">
+                        @product.ProductPrice.ToString("n0") VND
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    }
+</div>
+<div class="title-wrap">
+    <div class="background-title">S N E A K E R</div>
+    <div class="title">trending item</div>
+    <div class="title-detail">products</div>
+</div>
+<div class="product-items-carousel owl-carousel owl-theme">
+    @foreach (var product in ViewBag.TrendingProducts)
+    {
+        string image = "";
+        if (product.ImageData != null)
+        {
+            image = Convert.ToBase64String(product.ImageData);
+        }
+        <a href="@Url.RouteUrl("ChiTietSanPham", new { id = product.ProductId })" style="text-decoration:none;">
+            <div class="product-item-wrap item">
+                <div class="product-item">
+                    <div class="product-img-wrap">
+                        <img src="data:image/png;base64,@image" alt="">
+                    </div>
+                    <div class="product-name-wrap">
+                        @product.ProductName
+                    </div>
+                    <div class="product-category-wrap">
+                        @product.CategoryName
+                    </div>
+                    <div class="product-color-warp">
+                        @product.ColorSum Color
+                    </div>
+                    <div class="product-price">
+                        @product.ProductPrice
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+
+</div>
+
+@section Scripts{
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            nav: true,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 3500,
+            autoplayHoverPause: true,
+            center: true,
+            navText: ["<i class='bx bxs-chevron-left'></i>", "<i class='bx bxs-chevron-right'></i>"],
+            responsive: {
+                0: {
+                    items: 2
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                },
+                2000: {
+                    items: 5
+                },
+                3000: {
+                    items: 6
+                }
+
+            }
+        })
+    </script>
+
+}
+
+@section Styles
+{
+    <style type="text/css">
+
+        /*#region Main body  */
+        .main-body {
+            width: 100%;
+        }
+
+            .main-body .banner-wrap {
+                width: 100%;
+            }
+
+                .main-body .banner-wrap .banner-img {
+                    width: 100%;
+                    object-fit: cover;
+                }
+
+                    .main-body .banner-wrap .banner-img img {
+                        width: 100%;
+                    }
+
+            .main-body .title-wrap {
+                font-family: 'Montserrat', sans-serif;
+                width: 100%;
+                height: max-content;
+                -webkit-user-select: none; /* Safari */
+                -ms-user-select: none; /* IE 10 and IE 11 */
+                user-select: none; /* Standard syntax */
+                height: 160px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+                .main-body .title-wrap div {
+                    width: 100%;
+                    position: relative;
+                    z-index: 1;
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+                .main-body .title-wrap .background-title {
+                    font-weight: 900;
+                    font-size: 120px;
+                    z-index: 0;
+                    color: #F0EEEE;
+                    position: absolute;
+                }
+
+                .main-body .title-wrap .title {
+                    font-size: 40px;
+                    letter-spacing: 10px;
+                }
+
+                .main-body .title-wrap .title-detail {
+                    font-size: 22px;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                }
+        /*#endregion Main body  */
+
+        /*#region Carousel  */
+        .product-items-carousel {
+            color: #F0EEEE;
+        }
+
+        .product-item-wrap {
+            height: fit-content;
+            margin: auto 10px;
+        }
+
+        .product-name-wrap {
+            color: black;
+            font-weight: 600;
+            font-size: 1.2em;
+        }
+
+        .product-category-wrap {
+            color: gray !important;
+            font-size: 1.2em;
+        }
+
+        .product-color-warp {
+            color: gray;
+            font-size: 1.2em;
+        }
+
+        .product-price {
+            color: black;
+            font-weight: 600;
+            font-size: 1.2em;
+        }
+
+        .owl-nav {
+            position: absolute;
+            top: 40%;
+            margin: auto 0;
+            width: 100%;
+            color: black;
+            font-size: 30px;
+        }
+
+            .owl-nav .owl-next {
+                float: right;
+            }
+
+            .owl-nav .owl-prev {
+                float: left;
+            }
+
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            color: black;
+            font-family: 'Montserrat', sans-serif;
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+        }
+
+            .product-item .product-img-wrap {
+            }
+
+                .product-item .product-img-wrap img {
+                    object-fit: cover;
+                    aspect-ratio: 1/1;
+                }
+        /*#endregion Carousel  */
+
+        @@media only screen and (max-width: 1300px) {
+            .main-body .title-wrap .background-title {
+                font-weight: 900;
+                font-size: 12vw;
+                z-index: 0;
+                color: #F0EEEE;
+                position: absolute;
+            }
+
+            .main-body .title-wrap .title {
+                font-size: 4vw;
+                letter-spacing: 10px;
+            }
+
+            .main-body .title-wrap .title-detail {
+                font-size: 2.2vw;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+        }
+    </style>
+}
+
+
+
+

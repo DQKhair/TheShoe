@@ -1,0 +1,231 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+        <div class="detail-main-wrapper">
+            <!-- Phần trên-->
+            <div class="detail-main">
+
+                <!-- Hình detail-->
+                <div class="detail-main-image-wrapper">
+                    @{
+                        string image = "";
+                        var product = ViewBag.Img;
+                        if (product.ImageData != null)
+                        {
+                            image = Convert.ToBase64String(product.ImageData);
+                        }
+                    }
+                    <div class="detail-main-image" style="height:30%;">
+                        <img src="data:image/png;base64,@image" />
+                    </div>
+                </div>
+                <div class="detail-main-info-wrapper ">
+                    <div class="detail-info-name">@ViewBag.ProductDetail.ProductName</div>
+                    <div class="detail-info-category">@ViewBag.ProductDetail.CategoryName</div>
+                    <div class="detail-info-price">@ViewBag.ProductDetail.ProductPrice.ToString("n0") VND</div>
+                    <div class="detail-info-description">
+                        @ViewBag.ProductDetail.Description
+                    </div>
+
+                    <div style="display:flex; justify-content: start">
+                        <div class="detail-info-size">
+                            <span>Size</span>
+                            <select name="SizeValue" id="size">
+                                @foreach (var size in ViewBag.Size)
+                                {
+                                    <option value="@size.SizeValue">@size.SizeValue</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="detail-info-color mx-3">
+                            <span>Color</span>
+                            <select name="ColorName" id="color">
+                                @foreach (var color in ViewBag.Color)
+                                {
+                                    <option value="@color.ColorName">@color.ColorName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="detail-info-action">
+                        <button id="themgiohang" style="background-color:black; color:white;">
+                            Add to cart
+                            @*<a style="color:inherit" class="text-decoration-none" href="@Url.Action("AddToCart", "Cart", new { id = @ViewBag.ProductDetail.ProductId })">Add to cart</a>*@
+                        </button>
+                        <button>Favorite</button>
+                    </div>
+
+                    <hr />
+                    <div class="detail-info-terms">Free Delivery and Returns</div>
+                    <hr />
+                    <div class="detail-info-review d-flex justify-content-between">
+                        <span>Reviews (360)</span>
+                        <svg width="20" height="19" viewBox="0 0 35 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L17.5 16L33 2" stroke="black" stroke-width="3" />
+                        </svg>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+            <!-- Phần dưới-->
+            <div class="detail-sub"></div>
+        </div>
+
+
+
+<script>
+    $("#themgiohang").click(function () {
+        let size = document.querySelector('#size');
+        let color = document.querySelector('#color');
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("AddToCart", "Cart")",
+            data: { id: "@ViewBag.ProductDetail.ProductId", SizeValue: size.value , ColorName : color.value },
+            success: function () {
+                alert("Add succession");
+            }
+        });
+    });
+</script>
+
+
+@section Styles
+{
+    <style type="text/css">
+        .detail-main-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1920px;
+            margin: 100px auto;
+        }
+
+            .detail-main-wrapper .detail-main {
+                display: flex;
+                width: 100%;
+                gap: 100px;
+                justify-content: center;
+            }
+
+                .detail-main-wrapper .detail-main .detail-main-image-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    flex-basis: 30%;
+                    gap: 10px;
+                }
+
+                    .detail-main-wrapper .detail-main .detail-main-image-wrapper .detail-main-image {
+                        width: 100%;
+                    }
+
+                        .detail-main-wrapper .detail-main .detail-main-image-wrapper .detail-main-image img {
+                            width: 100%;
+                            
+                            object-fit: cover;
+                        }
+
+                    .detail-main-wrapper .detail-main .detail-main-image-wrapper .detail-sub-image-wrapper {
+                        display: flex;
+                        flex-basis: 50%;
+                        object-fit: cover;
+                        gap: 10px;
+                    }
+
+                        .detail-main-wrapper .detail-main .detail-main-image-wrapper .detail-sub-image-wrapper .detail-sub-image-item {
+                        }
+
+                            .detail-main-wrapper .detail-main .detail-main-image-wrapper .detail-sub-image-wrapper .detail-sub-image-item img {
+                                width: 100%;
+                                object-fit: cover;
+                                aspect-ratio: 1/1;
+                            }
+
+                .detail-main-wrapper .detail-main .detail-main-info-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    flex-basis: 40%;
+                }
+
+                    .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-name {
+                        font-weight: 600;
+                        font-size: 2.2em;
+                    }
+
+                    .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-category {
+                        font-size: 1.2em;
+                    }
+
+                    .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-price {
+                        font-weight: 600;
+                        font-size: 1.3em;
+                    }
+
+                    .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-description {
+                        width: 100%;
+                        font-size: 1.05em;
+                    }
+
+                    .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-size {
+                        font-weight: 600;
+                        display: flex;
+                        flex-direction: column;
+                        gap: .3em;
+                    }
+
+                        .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-size select {
+                            width: max-content;
+                            padding: 0.3em 5em 0.3em 0.5em;
+                            font-size: medium;
+                        }
+
+                    .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-color {
+                        font-weight: 600;
+                        display: flex;
+                        flex-direction: column;
+                        gap: .3em;
+                    }
+
+                        .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-color select {
+                            width: max-content;
+                            padding: 0.3em 5em 0.3em 0.5em;
+                            font-size: medium;
+                        }
+
+                    .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-action {
+                        display: flex;
+                        width: 100%;
+                        gap: 1em;
+                        margin-top: .8em;
+                    }
+
+                        .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-action button {
+                            flex-basis: 25%;
+                            height: 2.5em;
+                            border-radius: 50px;
+                            background-color: white;
+                            font-size: 1.1em;
+                            border-width: 1px;
+                            cursor: pointer;
+                        }
+
+                            .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-action button:hover {
+                                background-color: black;
+                                color: white;
+                            }
+
+                    .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-terms {
+                        font-weight: 600;
+                    }
+
+                    .detail-main-wrapper .detail-main .detail-main-info-wrapper .detail-info-review {
+                        font-weight: 600;
+                    }
+
+    </style>
+}
+

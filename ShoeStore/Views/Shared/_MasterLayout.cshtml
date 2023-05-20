@@ -1,0 +1,175 @@
+﻿@{string login = ""; ShoeStore.Models.getUserSession_Result user =null;
+    if (Session[ShoeStore.Common.CommonConstants.USER_SESSION] != null)
+    {
+        login = "logged-in";
+        user = Session[ShoeStore.Common.CommonConstants.USER_SESSION] as ShoeStore.Models.getUserSession_Result;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("Styles", required: false)
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
+          integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+          integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="app-header">
+        <div class="navbar-wrap">
+            <div class="ham-menu">
+                <i class='bx bx-menu-alt-right'></i>
+            </div>
+            <div class="toggle-btn">
+                <i class='bx bxs-chevron-right'></i>
+            </div>
+            <div class="logo-wrap">GHK2P</div>
+            <div class="nav-menu-wrap">
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("trangchu")" >home</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("danhsachsanpham")" >collections</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("danhsachsanpham")" >men</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("danhsachsanpham")" >women</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("danhsachsanpham")" >kids</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("danhsachsanpham")" >sale</a></div>
+            </div>
+            <div class="tool-nav-menu-wrap">
+                <div class="tool-nav-menu">
+                    <div class="tool-item">
+                        @using (Html.BeginForm("List", "Products", FormMethod.Get))
+                        {
+                            <div class="search-form">
+                                <input type="text" style="border: solid 2px grey; border-radius: 5px; height: 35px;" name="searchString" placeholder="Search...">
+                                <button class="border-0 bg-body" type="submit">
+                                    <svg width="22" height="22" viewBox="0 0 40 40" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.8213 24.205L37.9858 38.3695" stroke="black" stroke-width="3"
+                                              stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 14.8532C2 21.7397 7.58262 27.3223 14.4691 27.3223C17.9183 27.3223 21.0406 25.9218 23.2979 23.6584C25.5475 21.403 26.9383 18.2905 26.9383 14.8532C26.9383 7.96665 21.3556 2.38403 14.4691 2.38403C7.58262 2.38403 2 7.96665 2 14.8532Z"
+                                              stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        }
+                    </div>
+                    <div class="tool-item">
+                        <a href="@Url.Action("Index", "Cart")">
+                            <svg width="22" height="22" viewBox="0 0 44 41" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.10895 39.2862H36.785C37.3659 39.2862 37.8616 38.7922 37.9573 38.1177L41.5224 12.9496C41.643 12.0974 41.0845 11.3215 40.3501 11.3215H3.54388C2.80954 11.3215 2.25097 12.0974 2.37169 12.9496L5.93675 38.1177C6.03226 38.7922 6.52802 39.2862 7.10895 39.2862Z"
+                                      stroke="black" stroke-width="3" />
+                                <path d="M12.0441 11.3216V6.66078C12.0441 4.0867 13.8175 2 16.0053 2H27.8888C30.0766 2 31.85 4.0867 31.85 6.66078V11.3216"
+                                      stroke="black" stroke-width="3" />
+                            </svg>
+
+                        </a>
+                    </div>
+                    <div class="tool-item heart">
+                        <a href="">
+                            <svg width="22" height="22" viewBox="0 0 43 39" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M41.0002 13.438C41.0002 16.4345 39.8496 19.3128 37.7949 21.4419C33.0652 26.3444 28.4777 31.4566 23.5713 36.1815C22.4467 37.2487 20.6627 37.2098 19.5865 36.0943L5.45104 21.4419C1.17843 17.0129 1.17843 9.86296 5.45104 5.43409C9.76563 0.961687 16.7946 0.961687 21.1091 5.43409L21.623 5.96666L22.1365 5.4344C24.2051 3.28894 27.0225 2.07886 29.9657 2.07886C32.9088 2.07886 35.726 3.28882 37.7949 5.43409C39.8498 7.56336 41.0002 10.4414 41.0002 13.438Z"
+                                      stroke="black" stroke-width="3" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="account-wrap @Html.Raw(login)">
+                    <div class="login-btn">
+                        <a href="@Url.Action("Login", "Auth")">Log in</a>
+                    </div>
+                    <div class="user-profile">
+                        <a href="">
+                            @if (user != null && user.CustomerImage != null)
+                            {
+                                <div class="d-flex">
+                                    <img style="width:25px; height:25px; margin-right: 15px;" src=" data:image /png;base64,@Convert.ToBase64String(user.CustomerImage)" />
+
+                                    @Html.ActionLink("Logout", "Logout", "Auth");
+                                </div>
+                            }
+                            else
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 70 70" fill="none">
+                                    <path d="M35.0508 2.49146C16.8534 2.49146 2.10156 17.2433 2.10156 35.4407C2.10156 53.6379 16.8534 68.3899 35.0508 68.3899C53.248 68.3899 68 53.6379 68 35.4407C68 17.2433 53.248 2.49146 35.0508 2.49146Z" fill="#E5E5E5" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M9.58447 56.349C9.58447 56.349 16.9289 46.9727 35.0509 46.9727C53.173 46.9727 60.5177 56.349 60.5177 56.349" fill="#E5E5E5" />
+                                    <path d="M9.58447 56.349C9.58447 56.349 16.9289 46.9727 35.0509 46.9727C53.173 46.9727 60.5177 56.349 60.5177 56.349" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M35.0513 35.4412C40.5106 35.4412 44.936 31.0158 44.936 25.5565C44.936 20.0973 40.5106 15.6717 35.0513 15.6717C29.5919 15.6717 25.1665 20.0973 25.1665 25.5565C25.1665 31.0158 29.5919 35.4412 35.0513 35.4412Z" fill="#E5E5E5" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            }
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="main-body">
+        @RenderBody()
+        <div class="footer-wrap">
+            <div class="footer-img-wrap">
+                <img src="~/Images/footer.png" alt="">
+            </div>
+            <div class="footer-banner-wrap">
+                <div class="footer-banner-main-wrap">
+                    <div class="footer-main-about">
+                        <div class="footer-about-logo">ghk2p</div>
+                        <div class="footer-about-detail">
+                            <div class="line-detail">Providing online sneaker delivery service.</div>
+                            <div class="line-detail">With more than 200+ beautiful and luxurious sneaker</div>
+                            <div class="line-detail">as gifts for many special occasions of the year.</div>
+                        </div>
+                    </div>
+                    <div class="footer-main-contact">
+                        <div class="get-help contact-item">
+                            <div class="contact-title">Get help</div>
+                            <a href="">Delivery</a>
+                            <a href="">Return</a>
+                            <a href="">Contact Us</a>
+                        </div>
+                        <div class="about-us contact-item">
+                            <div class="contact-title">About us</div>
+                            <a href="">News</a>
+                            <a href="">Careers</a>
+                            <a href="">Investors</a>
+                        </div>
+                        <div class="social-network contact-item">
+                            <div class="contact-title">Social network</div>
+                            <a href="">Facebook</a>
+                            <a href="">Instagram</a>
+                            <a href="">Twitter</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-banner-license">
+                    &copy; @DateTime.Now.Year GHK2P. All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"
+            integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+            integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
