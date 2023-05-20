@@ -3,7 +3,10 @@
     {
         login = "logged-in";
         user = Session[ShoeStore.Common.CommonConstants.USER_SESSION] as ShoeStore.Models.getUserSession_Result;
+        // total quantity cart
+        
     }
+        var cart_total_Quantity = (ShoeStore.Models.Carts)Session["Cart"];
 }
 <!DOCTYPE html>
 <html>
@@ -62,7 +65,7 @@
                         }
                     </div>
                     <div class="tool-item">
-                        <a href="@Url.Action("Index", "Cart")">
+                        <a href="@Url.Action("ShowCart", "Cart")">
                             <svg width="22" height="22" viewBox="0 0 44 41" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.10895 39.2862H36.785C37.3659 39.2862 37.8616 38.7922 37.9573 38.1177L41.5224 12.9496C41.643 12.0974 41.0845 11.3215 40.3501 11.3215H3.54388C2.80954 11.3215 2.25097 12.0974 2.37169 12.9496L5.93675 38.1177C6.03226 38.7922 6.52802 39.2862 7.10895 39.2862Z"
@@ -70,7 +73,17 @@
                                 <path d="M12.0441 11.3216V6.66078C12.0441 4.0867 13.8175 2 16.0053 2H27.8888C30.0766 2 31.85 4.0867 31.85 6.66078V11.3216"
                                       stroke="black" stroke-width="3" />
                             </svg>
+                            @if (cart_total_Quantity == null)
+                            {
 
+                                int cart_total = 0;
+                                <span class="text-bg-danger rounded px-1">@cart_total</span>
+                            }
+                            else
+                            {
+                                int cart_total = Convert.ToInt32(cart_total_Quantity.Total_quantity().ToString());
+                                <span class="text-bg-danger rounded px-1">@cart_total</span>
+                            }
                         </a>
                     </div>
                     <div class="tool-item heart">
