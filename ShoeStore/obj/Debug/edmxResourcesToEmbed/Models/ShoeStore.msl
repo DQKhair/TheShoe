@@ -265,6 +265,8 @@
     <EntitySetMapping Name="Receipts">
       <EntityTypeMapping TypeName="ShoeStoreModel.Receipt">
         <MappingFragment StoreEntitySet="Receipt">
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
           <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
           <ScalarProperty Name="StatusId" ColumnName="StatusId" />
           <ScalarProperty Name="CustomerUsername" ColumnName="CustomerUsername" />
@@ -293,6 +295,8 @@
     <EntitySetMapping Name="DetailReceipts">
       <EntityTypeMapping TypeName="ShoeStoreModel.DetailReceipt">
         <MappingFragment StoreEntitySet="DetailReceipt">
+          <ScalarProperty Name="ColorProduct" ColumnName="ColorProduct" />
+          <ScalarProperty Name="SizeProduct" ColumnName="SizeProduct" />
           <ScalarProperty Name="ProductColorSizeId" ColumnName="ProductColorSizeId" />
           <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
           <ScalarProperty Name="Price" ColumnName="Price" />

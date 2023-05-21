@@ -66,48 +66,50 @@ namespace ShoeStore.Controllers
             return View();
         }
 
-        //public ActionResult CheckOut(FormCollection from)
-        //{
-        //    try
-        //    {
-        //        var sessionMaNguoiDung = (Customer)Session["NguoiDung"];
-        //        Carts cart = Session["Cart"] as Carts;
-        //        Receipt hoaDon = new Receipt();
-        //        if (Session["NguoiDung"] != null)
-        //        {
-        //            hoaDon.cu = sessionMaNguoiDung.MaNguoiDung;
-        //            hoaDon.TenKhachHang = sessionMaNguoiDung.TenNguoiDung;
-        //        }
-        //        else
-        //        {
-        //            hoaDon.MaNguoiDung = null;
-        //            hoaDon.TenKhachHang = from["TenKhachHang"];
-        //        }
-        //        hoaDon.TongSoLuong = Convert.ToInt32(cart.Total_quantity());
-        //        hoaDon.TongTien = Convert.ToInt32(cart.Total_money());
-        //        hoaDon.NgayMua = DateTime.Now;
-        //        hoaDon.MaPhuongThuc = int.Parse(from["MaPhuongThuc"]);
-        //        hoaDon.MaTrangThai = 1;
-        //        db.HoaDons.Add(hoaDon);
-        //        foreach (var item in cart.Items)
-        //        {
-        //            ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
-        //            chiTietHoaDon.SoLuongSanPham = item._quantity;
-        //            chiTietHoaDon.MaHoaDon = hoaDon.MaHoaDon;
-        //            chiTietHoaDon.MaSanPham = item._product.MaSanPham;
-        //            chiTietHoaDon.Gia = (item._product.DonGia * item._quantity);
-        //            db.ChiTietHoaDons.Add(chiTietHoaDon);
-        //        }
-        //        db.SaveChanges();
-        //        cart.ClearCart();
-        //        return RedirectToAction("CheckOut_Success", "Cart");
-        //    }
-        //    catch
-        //    {
-        //        return Content("Lỗi thanh toán, làm phiền kiểm tra lại thông tin đơn hàng");
+        public ActionResult CheckOut(FormCollection from)
+        {
+            try
+            {
+                var sessionMaNguoiDung = (Customer)Session["CheckTaiKhoan"];
+                Carts cart = Session["Cart"] as Carts;
+                Receipt hoaDon = new Receipt();
+                if (Session["CheckTaiKhoan"] != null)
+                {
+                    hoaDon.CustomerUsername = sessionMaNguoiDung.CustomerUsername;
+                    hoaDon.CustomerName = sessionMaNguoiDung.CustomerName;
+                }
+                else
+                {
+                    hoaDon.CustomerUsername = null;
+                    hoaDon.CustomerName = from["TenKhachHang"];
+                }
+                hoaDon.TotalQuantity = Convert.ToInt32(cart.Total_quantity());
+                hoaDon.Total = Convert.ToInt32(cart.Total_money());
+                hoaDon.dates = DateTime.Now;
+                hoaDon.PaymentId = int.Parse(from["MaPhuongThuc"]);
+                hoaDon.StatusId = 1;
+                db.Receipts.Add(hoaDon);
+                foreach (var item in cart.Items)
+                {
+                    DetailReceipt chiTietHoaDon = new DetailReceipt();
+                    chiTietHoaDon.quantityProduct = item._quantity;
+                    chiTietHoaDon.ReceiptId = hoaDon.ReceiptId;
+                    chiTietHoaDon.ProductColorSizeId = item._product.ProductId;
+                    chiTietHoaDon.Price = Convert.ToInt32((item._product.ProductPrice * item._quantity));
+                    chiTietHoaDon.SizeProduct = item.SizeValue;
+                    chiTietHoaDon.ColorProduct = item.ColorName;
+                    db.DetailReceipts.Add(chiTietHoaDon);
+                }
+                db.SaveChanges();
+                cart.ClearCart();
+                return RedirectToAction("CheckOut_Success", "Cart");
+            }
+            catch
+            {
+                return Content("Lỗi thanh toán, làm phiền kiểm tra lại thông tin đơn hàng");
 
-        //    }
-        //}
+            }
+        }
 
     }
 }

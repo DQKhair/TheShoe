@@ -26,6 +26,8 @@ namespace ShoeStore.Models
         public string CustomerUsername { get; set; }
         public Nullable<int> StatusId { get; set; }
         public Nullable<int> PaymentId { get; set; }
+        public Nullable<int> TotalQuantity { get; set; }
+        public string CustomerName { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Payment Payment { get; set; }

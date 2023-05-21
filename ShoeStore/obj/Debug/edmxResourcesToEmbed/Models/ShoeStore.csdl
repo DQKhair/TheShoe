@@ -380,6 +380,8 @@
     <NavigationProperty Name="Payment" Relationship="ShoeStoreModel.FK_RC_PM" FromRole="Receipt" ToRole="Payment" />
     <NavigationProperty Name="StatusRC" Relationship="ShoeStoreModel.FK_RC_STT" FromRole="Receipt" ToRole="StatusRC" />
     <NavigationProperty Name="DetailReceipts" Relationship="ShoeStoreModel.FK_RC_Detail_RC" FromRole="Receipt" ToRole="DetailReceipt" />
+    <Property Name="TotalQuantity" Type="Int32" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Size">
     <Key>
@@ -516,6 +518,8 @@
     <Property Name="ProductColorSizeId" Type="Int32" />
     <NavigationProperty Name="ProductColorSize" Relationship="ShoeStoreModel.FK_ProductColorSizeID_Detail_RC" FromRole="DetailReceipt" ToRole="ProductColorSize" />
     <NavigationProperty Name="Receipt" Relationship="ShoeStoreModel.FK_RC_Detail_RC" FromRole="DetailReceipt" ToRole="Receipt" />
+    <Property Name="SizeProduct" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="ColorProduct" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_ProductColorSizeID_Detail_RC">
     <End Type="ShoeStoreModel.ProductColorSize" Role="ProductColorSize" Multiplicity="0..1" />

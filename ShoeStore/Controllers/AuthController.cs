@@ -32,13 +32,23 @@ namespace ShoeStore.Controllers
             if (PasswordOption.Validation(password, hashPassword))
             {
                 var admin = db.Validate_Role(username).Single();
+                // khải thêm
+                var checktaikhoan = db.Customers.Where(s => s.CustomerUsername == admin.Username).SingleOrDefault();
+                
+                //end khải thêm
                 if (admin.Role == "AD")
                 {
+                    //khải thêm
+                    Session["CheckTaiKhoan"] = checktaikhoan;
+                    //end khải thêm
                     Session.Add(CommonConstants.USER_SESSION, admin);
                     return Redirect("~/Admin/Product/manager");
                 }
                 else
                 {
+                    //khải thêm
+                    Session["CheckTaiKhoan"] = checktaikhoan;
+                    //end khải thêm
                     var usersession = db.Get_session(username).First();
                     Session.Add(CommonConstants.USER_SESSION, usersession);
                     return RedirectToRoute("trangchu");

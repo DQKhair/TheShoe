@@ -1,7 +1,9 @@
 ﻿@model ShoeStore.Models.Carts
+@using ShoeStore.Common
 @{
     ViewBag.Title = "ShowCart";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
 }
 
 <style>
@@ -27,7 +29,7 @@
 <div class="mx-5">
     <h5 class="fw-bold text-uppercase my-3">My shopping cart</h5>
     <p class="text-danger"><b>When you buy more than 3 products, you will get a discount of up to  <span style="font-size:xx-large">10% </span>of the total product price</b></p>
-    <a class="text-decoration-none" href="@Url.Action("Index","HomeSP")">Buy more products</a>
+    <a class="text-decoration-none" href="@Url.Action("Home","Products")">Buy more products</a>
     @if (Model != null)
     {
 
@@ -100,7 +102,7 @@
                         @if (Model.Total_quantity() != 0)
                         {
                             <h5 class="fw-bold text-uppercase text-center">Please fill in the information</h5>
-                            if (ShoeStore.Common.CommonConstants.USER_SESSION == null)
+                            if (Session["CheckTaiKhoan"] == null)
                             {
                                 <label for="TenKH" class="form-label">Customer name</label>
                                 <input name="TenKhachHang" type="text" id="TenKH" class="form-control mw-100">
@@ -121,9 +123,10 @@
                                    value="1" /> <span>Other payment</span>
                             <div>
                                 <input type="submit" name="CheckOut" class="btn btn-danger mt-2 w-25 mx-auto d-block fs-5 fw-bolder" value="Pay" />
-                                @if (ShoeStore.Common.CommonConstants.USER_SESSION == null)
+                                @if (Session["CheckTaiKhoan"] == null)
                                 {
-                                    <a href="@Url.Action("RegisterUser", "LoginUser")" class="btn btn-success my-3">Register</a>
+                                   <a href="@Url.Action("RegisterUser", "LoginUser")" class="btn btn-outline-dark mt-2 w-25 mx-auto d-block fs-5 fw-bolder">Register</a>
+
                                 }
                             </div>
 

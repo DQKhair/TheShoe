@@ -42,6 +42,8 @@
     <Property Name="Price" Type="int" />
     <Property Name="ReceiptId" Type="int" />
     <Property Name="ProductColorSizeId" Type="int" />
+    <Property Name="SizeProduct" Type="nvarchar" MaxLength="5" />
+    <Property Name="ColorProduct" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Image">
     <Key>
@@ -92,6 +94,8 @@
     <Property Name="CustomerUsername" Type="varchar" MaxLength="100" />
     <Property Name="StatusId" Type="int" />
     <Property Name="PaymentId" Type="int" />
+    <Property Name="TotalQuantity" Type="int" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Size">
     <Key>

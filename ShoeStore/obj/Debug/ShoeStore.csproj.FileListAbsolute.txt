@@ -247,4 +247,3 @@ D:\2022-2023\DAPM\Doan\ShoeStore\obj\Debug\ShoeStore.csproj.CoreCompileInputs.ca
 D:\2022-2023\DAPM\Doan\ShoeStore\obj\Debug\ShoeStore.csproj.CopyComplete
 D:\2022-2023\DAPM\Doan\ShoeStore\obj\Debug\ShoeStore.dll
 D:\2022-2023\DAPM\Doan\ShoeStore\obj\Debug\ShoeStore.pdb
-D:\2022-2023\DAPM\Doan\ShoeStore\obj\Debug\ShoeStore.csproj.AssemblyReference.cache

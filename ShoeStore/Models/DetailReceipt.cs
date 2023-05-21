@@ -19,6 +19,8 @@ namespace ShoeStore.Models
         public Nullable<int> Price { get; set; }
         public Nullable<int> ReceiptId { get; set; }
         public Nullable<int> ProductColorSizeId { get; set; }
+        public string SizeProduct { get; set; }
+        public string ColorProduct { get; set; }
     
         public virtual ProductColorSize ProductColorSize { get; set; }
         public virtual Receipt Receipt { get; set; }

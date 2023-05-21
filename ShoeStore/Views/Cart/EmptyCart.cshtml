@@ -3,35 +3,42 @@
     ViewBag.Title = "EmptyCart";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
-
-<h5 class="fw-bold text-uppercase my-3">Giỏ hàng của tôi</h5>
-<p class="text-danger"><b>Khi bạn mua trên 2 sản phẩm thì bạn sẽ được giảm giá lên đến <span style="font-size:xx-large">10% </span>tổng giá sản phẩm</b></p>
-<a class="text-decoration-none" href="@Url.Action("Index","HomeSP")">Mua thêm sản phẩm</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">@Html.DisplayName("Tên sản phẩm")</th>
-            <th scope="col">@Html.DisplayName("hình sản phẩm")</th>
-            <th scope="col">@Html.DisplayName("Giá")</th>
-            <th scope="col">@Html.DisplayName("Số lượng")</th>
-            <th scope="col">@Html.DisplayName("Thành tiền")</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
-<div>
-    <p class="fw-bold">Tổng tiền: <span class="text-danger">0 VNĐ</span></p>
-    <p class="text-danger" style="text-align:center">Chưa có sản phẩm nào! Vui lòng mua sản phẩm</p>
+<div class="mx-5">
+    <h5 class="fw-bold text-uppercase my-3">My shopping cart</h5>
+    <p class="text-danger"><b>When you buy more than 3 products, you will get a discount of up to  <span style="font-size:xx-large">10% </span>of the total product price</b></p>
+    <a class="text-decoration-none" href="@Url.Action("Home","Products")">Buy more products</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayName("Name")</th>
+                <th scope="col">@Html.DisplayName("Image")</th>
+                <th scope="col">@Html.DisplayName("Color")</th>
+                <th scope="col">@Html.DisplayName("Size")</th>
+                <th scope="col">@Html.DisplayName("Price")</th>
+                <th scope="col">@Html.DisplayName("Quantity")</th>
+                <th scope="col">@Html.DisplayName("into money")</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <p class="fw-bold">Total quantity: <span>0</span></p>
+        <p class="fw-bold">Total money: <span class="text-danger">0 VNĐ</span></p>
+        <p class="text-danger" style="text-align:center">No products! Please buy the product</p>
+    </div>
 </div>
+
 
 
